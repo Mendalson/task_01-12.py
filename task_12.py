@@ -1,7 +1,7 @@
 class Dessert:
-    def __init__(self, name: str = " ", calories: int = 0) -> None:
+    def __init__(self, name: str = "Unknown", calories: int = 0) -> None:
         self.__name = name
-        self.__calories = calories
+        self.__calories = int(calories)
 
     @property
     def get_name(self) -> str:
@@ -28,7 +28,7 @@ class Dessert:
 
 
 class JellyBean(Dessert):
-    def __init__(self, name: str = " ", calories: int = 0, flavor: str = '') -> None:
+    def __init__(self, name: str = "Unknown", calories: int = 0, flavor: str = 'yea') -> None:
         super().__init__(name, calories)
         self.__flavor = flavor
 
@@ -48,24 +48,26 @@ class JellyBean(Dessert):
 
 def tests():
     while True:
-        dessert_name_input = input("Введите название десерта: ")
         try:
+            dessert_name_input = input("Введите название десерта: ")
             calories_input = int(input("Введите колличество калорий: "))
-            flavor_input = input("Введите flavor: ")
+            delicious_input = input("Введите вкусно ли: ")
             if calories_input < 0:
-                print("Значение калорий не может быть отрицательным")
+                print("Значение калорий не может быть отрицательным.")
                 break
-            test = JellyBean(dessert_name_input, calories_input, flavor_input)
+
+            test = JellyBean(name=dessert_name_input, calories=calories_input, flavor=delicious_input)
 
             print(test.get_name)
             print(test.get_calories)
-            print(test.get_flavor)
-
             print(test.is_healthy())
             print(test.is_delicious())
             print()
+        except EOFError:
+            print("Получен EOF, ввод завершен.")
+            break
         except ValueError:
-            print("Значение калорий должно быть целочисленным")
+            print("Значение калорий должно быть целочисленным.")
             break
 
 

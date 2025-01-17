@@ -1,7 +1,7 @@
 class Dessert:
-    def __init__(self, name: str = " ", calories: int = 0) -> None:
+    def __init__(self, name: str = "Unknown", calories: int = 0) -> None:
         self.__name = name
-        self.__calories = calories
+        self.__calories = int(calories)
 
     @property
     def get_name(self) -> str:
@@ -29,21 +29,25 @@ class Dessert:
 
 def tests():
     while True:
-        dessert_name_input = input("Введите название десерта: ")
         try:
+            dessert_name_input = input("Введите название десерта: ")
             calories_input = int(input("Введите колличество калорий: "))
             if calories_input < 0:
-                print("Значение калорий не может быть отрицательным")
+                print("Значение калорий не может быть отрицательным.")
                 break
-            test = Dessert(dessert_name_input, calories_input)
+
+            test = Dessert(name=dessert_name_input, calories=calories_input)
 
             print(test.get_name)
             print(test.get_calories)
             print(test.is_healthy())
             print(test.is_delicious())
             print()
+        except EOFError:
+            print("Получен EOF, ввод завершен.")
+            break
         except ValueError:
-            print("Значение калорий должно быть целочисленным")
+            print("Значение калорий должно быть целочисленным.")
             break
 
 
